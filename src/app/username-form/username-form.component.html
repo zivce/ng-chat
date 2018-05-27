@@ -1,0 +1,24 @@
+<mat-form-field>
+  
+  <input 
+  matInput 
+  placeholder="username"
+  value="user"
+  [formControl] = "username_form_control"
+  [errorStateMatcher] = "matcher"
+  >
+  
+  <mat-error *ngIf="username_form_control.hasError('required')">
+    Username is <strong>required.</strong>
+  </mat-error>
+
+
+</mat-form-field>
+
+<button 
+class="btn_log_in"
+[disabled]="usernameNotOk()"
+mat-button
+>
+  Log in!
+</button>
