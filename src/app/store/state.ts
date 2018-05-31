@@ -11,9 +11,26 @@ export const initState = {
 }
 
 export interface ConnState {
-    conn_user : any
+    connected_user : any
 }
 
 export const initConnState = {
-    conn_user : null
+    connected_user : null
+}
+
+export interface MsgState {
+    arr_of_msgs : Array<any>
+}
+
+export const initMsgState = {
+    arr_of_msgs : new Array<any>()
+}
+
+
+export interface RoomState {
+    curr_room : any
+}
+
+export const initRoomState = {
+    curr_room : null
 }

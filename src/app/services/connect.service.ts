@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store'
-import { AppState } from '../store/state';
+import { AppState, ConnState } from '../store/state';
 import { Observable} from 'rxjs';
 import { User } from '../models/index';
 import { getUserState } from '../store/selectors/user.selector';
@@ -10,6 +10,9 @@ import {environment} from '../../environments/environment';
 declare const Pusher : any;
 
 import ChatKit from '@pusher/chatkit'
+import { CONNECTED_USER } from '../store/actions/user.action';
+import { MSG_RCVD } from '../store/actions/messages.action';
+import { ROOM_SET } from '../store/actions/room.action';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +24,7 @@ export class ConnectService {
   pusher : any;
   chatManager : any;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<ConnState>) {
     if(this.store)
       this.user$ = this.store.select(getUserState);
     
@@ -34,17 +37,37 @@ export class ConnectService {
           })
         })
       })
-    console.log(environment.log.dbg + "user observable" );
-   
+    
   }
 
   connect() {
     this.chatManager
       .connect()
       .then((currentUser)=> {
-        //console.log(environment.log.info + "connected" + JSON.stringify(currentUser))
-
-
+        
+        this.store.dispatch({
+          type: CONNECTED_USER,
+          payload : currentUser
+        })
+        
+        return currentUser.subscribeToRoom({
+          roomId :       environment.pusher.default_room,
+          messageLimit : environment.pusher.msg_buffer,
+          hooks : {
+              onNewMessage : message => {
+                this.store.dispatch({
+                  type : MSG_RCVD,
+                  payload : message
+                })
+              }
+          } 
+        })
+      })
+      .then(currentRoom => {
+        this.store.dispatch({
+          type: ROOM_SET,
+          payload : currentRoom
+        })
       })
   }
 

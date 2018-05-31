@@ -7,7 +7,9 @@ export const environment = {
   pusher : {
     instance_locator : 'v1:us1:8a3110ca-c223-41a6-9333-2184f6d2bc83',
     login_url : 'http://localhost:3001/users',
-    auth_url : 'http://localhost:3001/authenticate'
+    auth_url : 'http://localhost:3001/authenticate',
+    default_room : 8465939,
+    msg_buffer :100
   },
   log : {
     dbg : '%c [[DEBUG]]',

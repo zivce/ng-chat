@@ -3,6 +3,8 @@ import { WhosOnlineListComponent } from './whos-online-list/whos-online-list.com
 import { WhosOnlineListItemComponent } from './whos-online-list-item/whos-online-list-item.component';
 import Chatkit from '@pusher/chatkit';
 import { ConnectService } from '../services/connect.service';
+import { Store } from '@ngrx/store';
+import { RoomState } from '../store/state';
 
 
 
@@ -23,10 +25,13 @@ import { ConnectService } from '../services/connect.service';
 })
 export class ChatScreenComponent implements OnInit {
 
-  constructor(private connectService : ConnectService) { }
+  constructor(private connectService : ConnectService,private store : Store<any>) {
+
+   }
 
   ngOnInit() {
    this.connectService.connect();
+    
   }
 
 }
