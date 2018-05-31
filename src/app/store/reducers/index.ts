@@ -3,11 +3,18 @@ import {createFeatureSelector, ActionReducerMap} from '@ngrx/store'
 import { loginUserReducer, connectedUserReducer } from './user.reducer';
 
 import { User } from '../../models';
-import { AppState, ConnState, MsgState } from '../state';
+import { AppState, ConnState, MsgState, RoomState } from '../state';
 
 import { messageReducer } from './message.reducer';
 import { roomReducer } from './room.reducer';
 
+export interface RootState {
+    user : AppState,
+    connected_user : ConnState,
+    messages : MsgState,
+    curr_room : RoomState
+
+} 
 
 export const ROOT_REDUCER = {
     user : loginUserReducer,
@@ -16,10 +23,10 @@ export const ROOT_REDUCER = {
     curr_room : roomReducer
 }
 
-export const getUserState = createFeatureSelector<AppState> ('user');
+export const getUserState = createFeatureSelector<RootState> ('user');
 
-export const getConnUserState = createFeatureSelector<ConnState>('connected_user');
+export const getConnUserState = createFeatureSelector<RootState>('connected_user');
 
-export const getMessagesState = createFeatureSelector<MsgState>('messages');
+export const getMessagesState = createFeatureSelector<RootState>('messages');
 
-export const getRoomState = createFeatureSelector<MsgState>('curr_room');
+export const getRoomState = createFeatureSelector<RootState>('curr_room');

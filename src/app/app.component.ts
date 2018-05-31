@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators'
 import { User } from './models';
 
 import { getUserState } from './store/selectors/user.selector';
+import { RootState } from './store/reducers';
 
 
 // https://toddmotto.com/ngrx-store-understanding-state-selectors
@@ -17,12 +18,13 @@ import { getUserState } from './store/selectors/user.selector';
 export class AppComponent implements OnInit{
   user$ : Observable<User>
   user : String;
-  constructor(private store: Store<AppState>)
+  constructor(private store: Store<RootState>)
   {
     if(this.store)
       this.user$ = this.store.select(getUserState);
     
     this.user$.subscribe(( resp) => {
+
     console.log("[DEBUG] WHAT APP SEES"  + JSON.stringify(resp) );
       if(resp)
         this.user = resp.name;

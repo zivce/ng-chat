@@ -6,7 +6,7 @@ import { AppState, ConnState } from '../state';
 
 export let getUserState  = createSelector(
     fromFeature.getUserState,
-    (state: AppState) => { 
+    (state: fromFeature.RootState) => { 
         if(state) 
             return state.user; 
     }
@@ -14,7 +14,7 @@ export let getUserState  = createSelector(
 
 export let getConnUserState  = createSelector(
     fromFeature.getConnUserState,
-    (state: ConnState) => { 
+    (state: fromFeature.RootState) => { 
         if(state) 
             return state.connected_user; 
     }

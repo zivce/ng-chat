@@ -8,6 +8,7 @@ import { Store } from  '@ngrx/store';
 import { AppState } from '../store/state';
 import { LOGIN_USER } from '../store/actions/user.action';
 import { User } from '../models';
+import { RootState } from '../store/reducers';
 
 
 export class ErrorStateMatcherImpl implements ErrorStateMatcher {
@@ -46,7 +47,7 @@ export class UsernameFormComponent implements OnInit {
 
   constructor(public toastr: ToastrService,
     private loginService : LoginService,
-    private store: Store<AppState>) {
+    private store: Store<RootState>) {
     this.input_value = "user";
     this.username_form_control = new FormControl('user_input',[
       Validators.required
