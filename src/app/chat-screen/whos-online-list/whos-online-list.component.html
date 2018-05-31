@@ -1,5 +1,15 @@
 
-<app-whos-online-list-item 
-[room] = "room_name">
+<div 
+*ngIf ="roomname$ | async ; let room">
+    {{room?.name}}
+</div>
 
-</app-whos-online-list-item>
+<ul>
+    <li *ngFor =" let user of users$ | async">
+        <app-whos-online-list-item
+        [user] = "user" 
+        >
+        </app-whos-online-list-item>
+    </li>
+   
+</ul>

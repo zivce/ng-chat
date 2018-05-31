@@ -13,6 +13,7 @@ import ChatKit from '@pusher/chatkit'
 import { CONNECTED_USER } from '../store/actions/user.action';
 import { MSG_RCVD } from '../store/actions/messages.action';
 import { ROOM_SET } from '../store/actions/room.action';
+import { RootState } from '../store/reducers';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class ConnectService {
   pusher : any;
   chatManager : any;
 
-  constructor(private store: Store<ConnState>) {
+  constructor(private store: Store<RootState>) {
     if(this.store)
       this.user$ = this.store.select(getUserState);
     
@@ -54,12 +55,12 @@ export class ConnectService {
           roomId :       environment.pusher.default_room,
           messageLimit : environment.pusher.msg_buffer,
           hooks : {
-              onNewMessage : message => {
-                this.store.dispatch({
-                  type : MSG_RCVD,
-                  payload : message
-                })
-              }
+            onNewMessage : message => {
+              this.store.dispatch({
+                type : MSG_RCVD,
+                payload : message
+              })
+            }
           } 
         })
       })

@@ -14,7 +14,7 @@ export let getUserState  = createSelector(
 
 export let getConnUserState  = createSelector(
     fromFeature.getConnUserState,
-    (state: ConnState) => { 
+    (state: fromFeature.RootState) => { 
         if(state) 
             return state.connected_user; 
     }

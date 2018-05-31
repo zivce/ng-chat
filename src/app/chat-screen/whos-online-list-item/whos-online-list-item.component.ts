@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class WhosOnlineListItemComponent implements OnInit {
 
   @Input() room : String;
+  @Input() user : any;
 
   constructor() { 
     

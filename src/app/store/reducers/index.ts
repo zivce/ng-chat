@@ -23,7 +23,7 @@ export const ROOT_REDUCER = {
     curr_room : roomReducer
 }
 
-export const getUserState = createFeatureSelector<RootState> ('user');
+export const getUserState = createFeatureSelector<AppState> ('user');
 
 export const getConnUserState = createFeatureSelector<RootState>('connected_user');
 

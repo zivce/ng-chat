@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-whos-online-list',
@@ -6,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./whos-online-list.component.scss']
 })
 export class WhosOnlineListComponent implements OnInit {
-  private room_name:String;
-  constructor() { }
+ 
+  @Input() roomname$:Observable<any>;
+  @Input() users$: Observable<any>;
+  
+  constructor() { 
+  }
 
   ngOnInit() {
-    this.room_name = "ehllo";
+
   }
 
 }
