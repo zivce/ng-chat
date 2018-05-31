@@ -1,7 +1,6 @@
 import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import {appRoutes} from './app.module';
 import { UsernameFormComponent } from './username-form/username-form.component';
 import { ChatScreenComponent } from './chat-screen/chat-screen.component';
@@ -10,6 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {Location} from '@angular/common'
 import {Router} from '@angular/router'
+import {ToastrModule, ToastrService} from 'ngx-toastr';
+import { HttpClientTestingModule,HttpTestingController } from '@angular/common/http/testing'
+import { LoginService } from './services/login.service';
+import { Store } from  '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCER } from './store/reducers';
+import { WhosOnlineListComponent } from './chat-screen/whos-online-list/whos-online-list.component';
+import { WhosOnlineListItemComponent } from './chat-screen/whos-online-list-item/whos-online-list-item.component';
+import { ConnectService } from './services/connect.service';
 
 describe('AppComponent', () => {
 
@@ -20,15 +28,22 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent,UsernameFormComponent,ChatScreenComponent
+        AppComponent,
+        UsernameFormComponent,
+        ChatScreenComponent, 
+        WhosOnlineListComponent,
+        WhosOnlineListItemComponent
       ],
-      imports : [
+      imports : [ToastrModule.forRoot(),
         RouterTestingModule.withRoutes(appRoutes),
           FormsModule,
           ReactiveFormsModule,
+          StoreModule.forRoot(ROOT_REDUCER),
+          HttpClientTestingModule,
           MatInputModule,
           BrowserAnimationsModule,NoopAnimationsModule
-      ]
+      ],
+      providers : [ToastrService,LoginService,ConnectService]
     });
 
     router = TestBed.get(Router);

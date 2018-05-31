@@ -1,0 +1,21 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction:column;
+}
+
+.chat_container {
+    display:flex;
+    flex:1;
+}
+
+.who_is_online_cntr{
+    overflow : auto;
+    width: 300px;
+    flex : none;
+    padding : 20;
+    background-color : #2c303b;
+    color:white;
+}
+
+

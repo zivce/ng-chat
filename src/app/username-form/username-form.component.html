@@ -1,24 +1,55 @@
-<mat-form-field>
+<div class="username_container">
+  <div *ngIf="!user_logged_in">
   
-  <input 
-  matInput 
-  placeholder="username"
-  value="user"
-  [formControl] = "username_form_control"
-  [errorStateMatcher] = "matcher"
-  >
+    <header>
+    <h1 class="md-display-4 main_head">Login with your username</h1>  
+    </header>
+    
+    <div class="flex">
+      
+      <mat-form-field>
+        
+        <input 
+        matInput 
+        placeholder="username"
+        [(ngModel)]="input_value"
+        [formControl] = "username_form_control"
+        [errorStateMatcher] = "matcher"
+        >
+        
+        <mat-error *ngIf="username_form_control.hasError('required')">
+          Username is <strong>required.</strong>
+        </mat-error>
+
+
+      </mat-form-field>
+
+      <button 
+      color="primary"
+      class="btn_log_in"
+      (click) = "logInUser($event)"
+      [disabled]="usernameNotOk()"
+      mat-button
+      >
+        Log in!
+      </button>
+
+    </div>
+    
+  </div>
+  <div *ngIf="user_logged_in">
+    <h1 class="md-display-4 main_head">Welcome {{input_value}}</h1>
+    
+    <button 
+    color="primary"
+    class="btn_log_in flex"
+    [disabled]="usernameNotOk()"
+    mat-button
+    routerLink = "/chat/{{input_value}}"
+    >
+      Proceed to chat.
+    </button>
+  </div>
   
-  <mat-error *ngIf="username_form_control.hasError('required')">
-    Username is <strong>required.</strong>
-  </mat-error>
 
-
-</mat-form-field>
-
-<button 
-class="btn_log_in"
-[disabled]="usernameNotOk()"
-mat-button
->
-  Log in!
-</button>
+</div>
