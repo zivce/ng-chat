@@ -1,3 +1,14 @@
-<div>
-  {{user?.name}}
+<div
+class="mat-body-1"
+>
+
+  <span 
+  style = "
+  float: left;
+  margin: 4%;" >
+    <div  id="presence_status" [ngClass]="{'active' : true}">
+    </div>
+  </span>
+
+  {{user}}
 </div>

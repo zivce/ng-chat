@@ -1,11 +1,20 @@
 <div class="container">
   <div class="chat_container">
+
     <aside class="who_is_online_cntr">
       <app-whos-online-list
       [roomname$]  = "room$"
+      [users$] = "users$"
       >  
       </app-whos-online-list>
     </aside>
+
+    <main class="chat_main">
+      <app-send-message-form
+      class="send_message_form"
+      >
+      </app-send-message-form>
+    </main>
 
     
   </div>

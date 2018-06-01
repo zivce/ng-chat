@@ -2,45 +2,52 @@
   <div *ngIf="!user_logged_in">
   
     <header>
-    <h1 class="md-display-4 main_head">Login with your username</h1>  
+      <h1 class="mat-display-1 main_head">Login</h1>  
     </header>
-    
-    <div class="flex">
+
+    <section class="mat-typography">
       
-      <mat-form-field>
+      <div class="flex">
         
-        <input 
-        matInput 
-        placeholder="username"
-        [(ngModel)]="input_value"
-        [formControl] = "username_form_control"
-        [errorStateMatcher] = "matcher"
+        <mat-form-field>
+          
+          <input 
+          matInput 
+          placeholder="username"
+          [(ngModel)]="input_value"
+          [formControl] = "username_form_control"
+          [errorStateMatcher] = "matcher"
+          >
+          
+          <mat-error *ngIf="username_form_control.hasError('required')">
+            Username is <strong>required.</strong>
+          </mat-error>
+
+
+        </mat-form-field>
+
+        <button 
+        mat-raised-button
+        color="primary"
+        class="btn_log_in mat-button"
+        (click) = "logInUser($event)"
+        [disabled]="usernameNotOk()"
+        mat-button
         >
-        
-        <mat-error *ngIf="username_form_control.hasError('required')">
-          Username is <strong>required.</strong>
-        </mat-error>
+          Log in!
+        </button>
 
-
-      </mat-form-field>
-
-      <button 
-      color="primary"
-      class="btn_log_in"
-      (click) = "logInUser($event)"
-      [disabled]="usernameNotOk()"
-      mat-button
-      >
-        Log in!
-      </button>
-
-    </div>
+      </div>
     
+  </section>
+
   </div>
+
   <div *ngIf="user_logged_in">
-    <h1 class="md-display-4 main_head">Welcome {{input_value}}</h1>
+    <h1 class="mat-display-1 main_head">Welcome {{input_value}}</h1>
     
     <button 
+    mat-raised-button
     color="primary"
     class="btn_log_in flex"
     [disabled]="usernameNotOk()"

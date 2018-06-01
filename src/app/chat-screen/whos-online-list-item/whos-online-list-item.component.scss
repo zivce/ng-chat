@@ -1,0 +1,16 @@
+$presence_inactive : #4b5173;
+$presence_active : #368836;
+
+
+
+
+#presence_status
+{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: $presence_inactive;
+}
+.active {
+    background-color: $presence_active;
+}

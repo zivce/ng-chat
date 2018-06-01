@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~ngx-toastr/toastr.css";
-body { margin: 0; }
-/* @import '~@angular/material/prebuilt-themes/purple-green.css'; */
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
+body { 
+    margin: 0;
+    background: linear-gradient(90deg, #aea4e3, #d3ffe8);
+}
+#toast-container {
+   font-family: 'Roboto', 'Helvetica-Neue',sans-serif; 
+}

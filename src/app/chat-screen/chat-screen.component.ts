@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { RootState, getRoomState } from '../store/reducers';
 import { Observable, Subscription } from 'rxjs';
 import { selectRoom } from '../store/selectors/room.selector';
+import { environment } from '../../environments/environment';
 
 
 
@@ -26,8 +27,9 @@ import { selectRoom } from '../store/selectors/room.selector';
 
 })
 export class ChatScreenComponent implements OnInit {
+  
   public room$ : Observable<any>;
-  public users$ : Observable<any>;
+  public users$ : Promise<any>;
   
   room_name : string;
   subscription : Subscription = null;
@@ -37,15 +39,14 @@ export class ChatScreenComponent implements OnInit {
     private store : Store<RootState>) {
     
     this.room$ = this.store.select(selectRoom)
+    
 
-    this.users$ = this.store.select(selectUsers);
-      
     this.subscription = this.room$.subscribe(( resp) => {
-
-      console.log("[DEBUG] WHAT CHAT SCREEN SEES"  + JSON.stringify(resp) );
-
         if(resp)
+        {
           this.room_name = resp.name;
+          this.users$ = Promise.resolve(resp.userIds);
+        }
       })
   
 

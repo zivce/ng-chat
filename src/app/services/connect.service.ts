@@ -46,6 +46,9 @@ export class ConnectService {
       .connect()
       .then((currentUser)=> {
         
+        /**
+         * Dispatch user is connected
+         */
         this.store.dispatch({
           type: CONNECTED_USER,
           payload : currentUser

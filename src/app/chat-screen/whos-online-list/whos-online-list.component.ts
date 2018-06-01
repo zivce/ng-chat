@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class WhosOnlineListComponent implements OnInit {
  
   @Input() roomname$:Observable<any>;
-  @Input() users$: Observable<any>;
+  @Input() users$: Promise<any>;
   
   constructor() { 
   }
