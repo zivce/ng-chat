@@ -1,13 +1,15 @@
 <div
-class="mat-body-1"
+class="mat-body-2"
 >
-  <div style="display:flex;flex-direction: row;">
-    <span>
+  <div style="display:flex;flex-flow: row-reverse;">
+    <span style="flex:0.9;">
       {{user}}  
     </span>
    
-    <span>
-      <div  id="presence_status" [ngClass]="{'active' : presenceIndicator}">
+    <span style="flex:0.3;">
+      <div  
+      id="presence_status" 
+      [ngClass]="{'active' : presenceIndicator}">
       </div>
     </span>
 

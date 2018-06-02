@@ -37,9 +37,9 @@ export const initRoomState = {
 
 
 export interface PresenceState {
-    present_users : Array<any>
+    present_users : Array<User>
 }
 
 export const initPresenceState = {
-    present_users : new Array<any>()
+    present_users : new Array<User>()
 }

@@ -1,0 +1,12 @@
+.send_message_container > * {
+    color : black;
+}
+
+.send_message_container >>> .mat-form-field-label{
+    color:black;
+}
+
+
+.mat-form-field-label-wrapper >>> .mat-form-field.mat-focused .mat-form-field-label{
+    color:rgb(26, 25, 68);
+}

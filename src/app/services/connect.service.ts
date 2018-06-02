@@ -10,9 +10,9 @@ import {environment} from '../../environments/environment';
 declare const Pusher : any;
 
 import ChatKit from '@pusher/chatkit'
-import { CONNECTED_USER, UPDATE_USER } from '../store/actions/user.action';
+import { CONNECTED_USER, DISCONNECTED_USER } from '../store/actions/user.action';
 import { MSG_RCVD } from '../store/actions/messages.action';
-import { ROOM_SET, PRESENCE_UPDATED } from '../store/actions/room.action';
+import { ROOM_SET, PRESENCE_UPDATED, PresenceRoomUpdated } from '../store/actions/room.action';
 import { RootState } from '../store/reducers';
 
 @Injectable({
@@ -75,7 +75,14 @@ export class ConnectService {
               })
               //Just rerender the comp
             },
-            onUserWentOffline : (resp) => console.log(environment.log.info, " USER WENT OFFLINE ", JSON.stringify(resp)),
+            onUserWentOffline : (resp) => {
+
+              this.presenceStore$.next(true);
+              this.store.dispatch({
+                type : DISCONNECTED_USER,
+                payload : resp
+              });
+            },
             onUserJoined : (resp) => console.log(environment.log.info, " ", JSON.stringify(resp)),
             onNewMessage : message => {
               this.store.dispatch({

@@ -17,6 +17,8 @@
 .chat_main >>> .mat-form-field-infix{
     width:85vw !important;
 }
+
+
 .send_message_form
 {
     position: absolute;
