@@ -6,11 +6,14 @@ $presence_active : #368836;
 
 #presence_status
 {
-    width: 6px;
-    height: 6px;
+    width: 11px;
+    height: 11px;
+    margin-left: 20px;
+    margin-top: 5px;
     border-radius: 50%;
     background-color: $presence_inactive;
 }
+
 .active {
-    background-color: $presence_active;
+    background-color: $presence_active !important;
 }

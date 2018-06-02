@@ -34,3 +34,12 @@ export interface RoomState {
 export const initRoomState = {
     curr_room : null
 }
+
+
+export interface PresenceState {
+    present_users : Object
+}
+
+export const initPresenceState = {
+    present_users : null
+}

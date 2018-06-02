@@ -9,7 +9,9 @@ class="mat-subheading-2 room_name"
     <li *ngFor =" let user of users$ | async">
 
         <app-whos-online-list-item
+        [rerend] = "rerender"
         [user] = "user" 
+        [room$] = "roomname$"
         >
         </app-whos-online-list-item>
         

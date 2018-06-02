@@ -42,7 +42,7 @@ export class UsernameFormComponent implements OnInit {
   pos_toastr : Object;
 
   @Input()
-  public input_value : String;
+  public input_value : string;
   
   @Input()
   public errorStateMatcher: ErrorStateMatcher;
@@ -89,7 +89,7 @@ export class UsernameFormComponent implements OnInit {
         {
           this.toastr.success("Logged in","Welcome again!",this.pos_toastr);
         }
-        
+        window.localStorage.setItem("username",this.input_value);
 
         this.store.dispatch({
           type:LOGIN_USER,

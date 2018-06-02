@@ -1,9 +1,9 @@
 export class User {
     
-    public name: String
-
-    constructor(u : String)
+    public name: string
+    constructor(u : string)
     {
         this.name = u;
+
     }
 }

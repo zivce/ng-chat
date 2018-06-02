@@ -5,6 +5,8 @@ import { User } from '../../models';
 
 export const LOGIN_USER = "[POST] login user";
 export const CONNECTED_USER = "[AUTH] connected user";
+export const UPDATE_USER = "[UPDATE] update user";
+
 
 export class LoginUser  implements Action {
     

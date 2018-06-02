@@ -1,4 +1,4 @@
-import { initState, AppState, initConnState, ConnState } from "../state";
+import { initState, AppState, initConnState, ConnState, initRoomState } from "../state";
 import { User } from "../../models";
 import { ActionReducer, State } from "@ngrx/store";
 import { Action } from "@ngrx/store";
@@ -21,6 +21,8 @@ export function loginUserReducer(state = initState, action : Action)
         }
     }
 }
+
+
 
 export function connectedUserReducer(state = initConnState, action : Action) 
 {
