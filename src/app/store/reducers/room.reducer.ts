@@ -32,7 +32,7 @@ export function presenceReducer (state = initPresenceState, action : Action)
             const {payload} = action as PresenceRoomUpdated; 
             return {
                 ...state,
-                present_users :  {...state.present_users, payload}
+                present_users :  [...state.present_users, payload]
             }
         }
         default : 

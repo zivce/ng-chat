@@ -1,11 +1,13 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { RootState, getRoomState } from '../../store/reducers';
 import { selectRoom, selectPresent } from '../../store/selectors/room.selector';
 import { environment } from '../../../environments/environment';
-import { PresenceState } from '../../store/state';
+import { PresenceState, RoomState } from '../../store/state';
 import { ConnectService } from '../../services/connect.service';
+import { map } from 'rxjs/operators';
+import { User } from '../../models';
 
 @Component({
   selector: 'app-whos-online-list-item',
@@ -13,50 +15,56 @@ import { ConnectService } from '../../services/connect.service';
   styleUrls: ['./whos-online-list-item.component.scss'],
   changeDetection : ChangeDetectionStrategy.OnPush
 })
-export class WhosOnlineListItemComponent implements OnInit {
+export class WhosOnlineListItemComponent implements OnInit,DoCheck {
 
   @Input() room : String;
   @Input() user : any;
   @Input() room$ : Observable<any>;
   @Input() rerend : boolean;
 
-  present_users$ : Observable<any>;
+  present_users$ : Observable<Array<User>>;
 
   presenceIndicator : Boolean
   constructor(
     private cd : ChangeDetectorRef,
-    private store : Store<PresenceState>,
+    private store : Store<RoomState>,
     private cs : ConnectService) { 
     this.presenceIndicator = false;
-    // this.present_users$ = this.store.select(selectPresent);
+    this.present_users$ = this.store.select(selectPresent);
 
-    // this.present_users$.subscribe(resp => console.log("present", resp));
-
-    this.cs.presenceStore$.subscribe((val)=> {
-      console.log("dodat user");
-      console.log("source of room ",this.room$.source);
+    /** Find out how is online in group */
+    this.present_users$.subscribe((resp)=>{
       
+      console.log("getting array of joined users", resp);
+
+      const joined_user = resp.filter((elem) => {
+        return elem.name === this.user;
+      })
+      
+      console.log("this guy joined", joined_user);
+
+      if(joined_user.length === 1)
+      {
+        this.presenceIndicator = true;
+        cd.markForCheck();
+      }
+      else
+      {
+        this.presenceIndicator = false;
+      }
+
     })
 
   }
-  ngDoCheck() {
+  ngDoCheck(){
 
-  }
-  ngOnChanges()
-  {
-    
   }
   
   ngOnInit() 
   {
     this.room$.subscribe((resp)=> {
-      console.log(environment.log.info + JSON.stringify(resp.userStore.presenceStore.store));
-
       const presenceObj= resp.userStore.presenceStore.store;
-      
-      console.log(environment.log.info + JSON.stringify(presenceObj));
       this.presenceIndicator = presenceObj[this.user].state === "offline" ? false : true; 
-
     })
   }
 
