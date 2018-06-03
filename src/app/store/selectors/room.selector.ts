@@ -16,6 +16,15 @@ export const selectPresent = createSelector(
     fromFeature.getPresenceState,
     (state : PresenceState) => {
         if(state)
-            return state.present_users;
+            return state.entities;
+    }
+)
+
+
+export const selectPresentIds = createSelector(
+    fromFeature.getPresenceState,
+    (state : PresenceState) => {
+        if(state)
+            return state.ids;
     }
 )

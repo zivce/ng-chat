@@ -65,7 +65,7 @@ export class ConnectService {
           roomId :       environment.pusher.default_room,
           messageLimit : environment.pusher.msg_buffer,
           hooks : {
-            onUserCameOnline : (resp) => {
+            onUserCameOnline : (resp) => { 
               
               this.presenceStore$.next(true);
 
@@ -80,7 +80,7 @@ export class ConnectService {
               this.presenceStore$.next(true);
               this.store.dispatch({
                 type : DISCONNECTED_USER,
-                payload : resp
+                id : resp.id
               });
             },
             onUserJoined : (resp) => console.log(environment.log.info, " ", JSON.stringify(resp)),

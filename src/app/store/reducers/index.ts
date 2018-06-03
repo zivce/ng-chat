@@ -29,5 +29,5 @@ export const ROOT_REDUCER = {
 export const getUserState = createFeatureSelector<AppState> ('user');
 export const getConnUserState = createFeatureSelector<RootState>('connected_user');
 export const getMessagesState = createFeatureSelector<RootState>('messages');
-export const getRoomState = createFeatureSelector<RoomState>('curr_room');
+export const getRoomState = createFeatureSelector<RootState>('curr_room');
 export const getPresenceState = createFeatureSelector<PresenceState>('present_users');

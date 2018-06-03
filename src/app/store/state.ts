@@ -1,6 +1,6 @@
 // https://github.com/sapientglobalmarkets/staffer/blob/master/staffer-ng2-ngrxstore/src/app/shared/store/state.ts
-
-import {User} from '../models/index';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity'
+import { User } from '../models/index';
 
 export interface AppState {
     user : User
@@ -36,10 +36,13 @@ export const initRoomState = {
 }
 
 
-export interface PresenceState {
-    present_users : Array<User>
+
+export const adapter : EntityAdapter<User> = createEntityAdapter<User>();
+
+
+export interface PresenceState extends EntityState<User>{
+    
 }
 
-export const initPresenceState = {
-    present_users : new Array<User>()
-}
+
+export const initPresenceState : PresenceState = adapter.getInitialState();

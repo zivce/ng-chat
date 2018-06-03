@@ -3,6 +3,7 @@ import * as fromFeature from '../reducers/index';
 
 import {createSelector} from '@ngrx/store'
 import { AppState, ConnState } from '../state';
+import { User } from '../../models';
 
 export let getUserState  = createSelector(
     fromFeature.getUserState,
