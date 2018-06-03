@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store'
 import { AppState, ConnState } from '../store/state';
 import { Observable, Subject} from 'rxjs';
-import { User } from '../models/index';
+import { User, Message } from '../models/index';
 import { getUserState } from '../store/selectors/user.selector';
 export const INSTANCE_LOCATOR = "v1:us1:8a3110ca-c223-41a6-9333-2184f6d2bc83"
 
@@ -14,6 +14,10 @@ import { CONNECTED_USER, DISCONNECTED_USER } from '../store/actions/user.action'
 import { MSG_RCVD } from '../store/actions/messages.action';
 import { ROOM_SET, PRESENCE_UPDATED, PresenceRoomUpdated } from '../store/actions/room.action';
 import { RootState } from '../store/reducers';
+
+
+import * as moment from 'moment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +82,7 @@ export class ConnectService {
             onUserWentOffline : (resp) => {
 
               this.presenceStore$.next(true);
+              
               this.store.dispatch({
                 type : DISCONNECTED_USER,
                 id : resp.id
@@ -87,7 +92,13 @@ export class ConnectService {
             onNewMessage : message => {
               this.store.dispatch({
                 type : MSG_RCVD,
-                payload : message
+                payload : new Message(
+                  message.id,
+                  message.senderId,
+                  message.roomId,
+                  message.text,
+                  moment(message.createdAt)
+                )
               })
             }
           } 

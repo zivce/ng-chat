@@ -32,6 +32,8 @@ import { MessageListComponent } from './chat-screen/message-list/message-list.co
 import { SendMessageFormComponent } from './chat-screen/send-message-form/send-message-form.component';
 import { ConnectService } from './services/connect.service';
 
+import { MessageListItmComponent } from './chat-screen/message-list/message-list-itm/message-list-itm.component';
+
 
 
 export const appRoutes : Routes = [
@@ -47,7 +49,8 @@ export const appRoutes : Routes = [
     WhosOnlineListComponent,
     WhosOnlineListItemComponent,
     MessageListComponent,
-    SendMessageFormComponent
+    SendMessageFormComponent,
+    MessageListItmComponent
   ],
   imports: [
     

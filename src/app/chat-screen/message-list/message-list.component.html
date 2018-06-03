@@ -1,3 +1,6 @@
-<p>
-  message-list works!
-</p>
+<div *ngFor = "let msg of messages$ | async">
+  <app-message-list-itm  
+  [msg] = "msg"
+  >
+  </app-message-list-itm>
+</div>

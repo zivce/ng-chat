@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Message } from '../../models';
+import { RootState } from '../../store/reducers';
+import { MsgState } from '../../store/state';
+import { Store } from '@ngrx/store';
+import { selectMessages, selectMessagesArr } from '../../store/selectors/message.selector';
+import { Dictionary } from '@ngrx/entity/src/models';
 
 @Component({
   selector: 'app-message-list',
@@ -6,8 +13,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./message-list.component.scss']
 })
 export class MessageListComponent implements OnInit {
-
-  constructor() { }
+  private messages$ : Observable<Array<Message>>;
+  
+  constructor(
+    private store : Store<RootState>
+  
+  ) { 
+    this.messages$ = this.store.select(selectMessagesArr);
+  }
 
   ngOnInit() {
   }
