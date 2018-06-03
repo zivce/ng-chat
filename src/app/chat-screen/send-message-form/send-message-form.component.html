@@ -6,6 +6,7 @@ class="send_message_container">
   <input
   placeholder="insert message and hit enter"
   id="msg_input"
+  (keydown) ="sendMsg($event)"
   matInput
   >
 </mat-form-field>

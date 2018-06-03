@@ -34,8 +34,8 @@ import { ConnectService } from './services/connect.service';
 
 import { MessageListItmComponent } from './chat-screen/message-list/message-list-itm/message-list-itm.component';
 
-
-
+import {AvatarModule } from 'ngx-avatar'
+ 
 export const appRoutes : Routes = [
   {path : "", component : UsernameFormComponent},
   {path : "chat/:id", component : ChatScreenComponent}
@@ -59,7 +59,7 @@ export const appRoutes : Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(ROOT_REDUCER),
-    
+    AvatarModule,
     /**
      * Material modules
      */

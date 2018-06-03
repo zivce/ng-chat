@@ -1,3 +1,36 @@
-<div>
-  {{msg.id}}
+<div class="msg_container">
+ 
+  <div class="mat-body-2" 
+  style="
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  width: fit-content;">
+ 
+  <span style="flex: 0.2;">
+    <ngx-avatar
+    value="{{prettyPrintUserId()}}"
+    size = "30"
+    >
+    </ngx-avatar>    
+  </span>
+<!-- 
+  <span style="flex:0.1;">
+    {{msg.senderId}} 
+  </span>
+   -->
+  <span style ="    
+  height: fit-content;
+  margin: auto;
+  margin-left: 20px;"> 
+    {{msg.createdAt.format("dddd HH:mm A")}}
+  </span></div>
+  
+  <div style="
+  color:white;
+  margin-left: 7px;
+  margin-top: 5.6px;" 
+  class="mat-body-1"> 
+    {{msg.text}} 
+  </div>
   </div>
