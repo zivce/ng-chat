@@ -43,6 +43,7 @@ export class ChatScreenComponent implements OnInit {
     private store : Store<RootState>,
     private ref : ChangeDetectorRef) {
     
+
     this.room$ = this.store.select(selectRoom)
 
     connectService.presenceStore$.subscribe((val)=>{
@@ -61,6 +62,7 @@ export class ChatScreenComponent implements OnInit {
 
   }
   ngOnDestroy(){
+    
     this.subscription.unsubscribe();
   }
   ngOnInit() {

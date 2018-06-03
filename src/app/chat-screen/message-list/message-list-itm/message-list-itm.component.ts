@@ -14,10 +14,15 @@ export class MessageListItmComponent implements OnInit {
   @Input() msg : Message;
   
   constructor() {
-
-   }
+  }
+    
   
   prettyPrintUserId(){
+    /**Get to last msg */
+    const t  = document.querySelector('.chat_main');
+    if(t)
+      t.scrollTop = t.scrollHeight;
+
     const len = this.msg.senderId.length;
     return this.msg.senderId.charAt(0) + this.msg.senderId.charAt(len-1);
 
