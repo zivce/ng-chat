@@ -16,8 +16,9 @@ export class Message {
         public senderId : string,
         public roomId : number,
         public text : string,
-        public createdAt : moment.Moment
+        public createdAt : Date,
+        public dateFormat : string
     ){
-        this.createdAt = moment();
+        this.dateFormat = moment(this.createdAt).format("dddd DD-MM HH:mm A");
     }
 }

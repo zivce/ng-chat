@@ -6,7 +6,7 @@ import { ConnectService } from '../services/connect.service';
 import { Store } from '@ngrx/store';
 import { RootState, getRoomState } from '../store/reducers';
 import { Observable, Subscription, Subject } from 'rxjs';
-import { selectRoom } from '../store/selectors/room.selector';
+import { selectRoom, selectPresentIds } from '../store/selectors/room.selector';
 import { environment } from '../../environments/environment';
 
 
@@ -34,11 +34,12 @@ export class ChatScreenComponent implements OnInit {
   public present_users$ : Observable<any>
   public trigger_rerender_of_whos_online : boolean;
   
+  public present$ : Observable<string[] | number[]>
+
   room_name : string;
   subscription : Subscription = null;
 
   constructor(
-    private _ngZone : NgZone,
     private connectService : ConnectService,
     private store : Store<RootState>,
     private ref : ChangeDetectorRef) {
@@ -46,10 +47,14 @@ export class ChatScreenComponent implements OnInit {
 
     this.room$ = this.store.select(selectRoom)
 
-    connectService.presenceStore$.subscribe((val)=>{
-      this.trigger_rerender_of_whos_online = val;
+    // connectService.presenceStore$.subscribe((val)=>{
+    //   this.trigger_rerender_of_whos_online = val;
       
-    })
+    // })
+
+    //this.present$ = this.store.select(selectPresentIds);
+
+    // this.present$.subscribe(resp => this.users$ = Promise.resolve(resp));
 
     this.subscription = this.room$.subscribe(( resp) => {
         if(resp)

@@ -20,9 +20,6 @@ export class MessageListComponent implements OnInit {
   
   ) { 
     
-    const t  = document.querySelector('.chat_main');
-    if(t)
-      t.scrollTop = t.scrollHeight;
 
     this.messages$ = this.store.select(selectMessagesArr);
   }

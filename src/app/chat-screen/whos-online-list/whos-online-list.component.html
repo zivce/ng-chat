@@ -5,7 +5,7 @@ class="mat-subheading-2 room_name"
     {{room?.name}}
 </div>
 
-<ul style="list-style-type: none;">
+<ul style="list-style-type: none; padding-left: 0px;">
     <li *ngFor =" let user of users$ | async">
 
         <app-whos-online-list-item
@@ -15,5 +15,6 @@ class="mat-subheading-2 room_name"
         </app-whos-online-list-item>
         
     </li>
+
    
 </ul>

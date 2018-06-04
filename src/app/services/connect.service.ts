@@ -88,7 +88,17 @@ export class ConnectService {
                 id : resp.id
               });
             },
-            onUserJoined : (resp) => console.log(environment.log.info, " ", JSON.stringify(resp)),
+            onUserJoined : (resp) => {
+              
+              this.presenceStore$.next(true);
+              
+              this.store.dispatch({
+                type : PRESENCE_UPDATED,
+                payload : resp
+              })
+
+
+            },
             onNewMessage : message => {
               this.store.dispatch({
                 type : MSG_RCVD,
@@ -97,7 +107,8 @@ export class ConnectService {
                   message.senderId,
                   message.roomId,
                   message.text,
-                  moment(message.createdAt)
+                  message.createdAt,
+                  ""
                 )
               })
             }

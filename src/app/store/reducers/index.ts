@@ -18,6 +18,8 @@ export interface RootState {
 
 } 
 
+export * from '../actions';
+
 export const ROOT_REDUCER = {
     user : loginUserReducer,
     connected_user : connectedUserReducer,

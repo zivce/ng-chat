@@ -12,8 +12,11 @@ import * as moment from 'moment';
 export class MessageListItmComponent implements OnInit {
 
   @Input() msg : Message;
-  
+  private date : string;
+
   constructor() {
+    // this.date = moment(this.msg.createdAt).format("dddd HH:mm A");
+
   }
     
   
