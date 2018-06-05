@@ -6,10 +6,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 import { LoginService } from '../services/login.service';
 import { Store } from  '@ngrx/store';
 import { AppState } from '../store/state';
-import { LOGIN_USER } from '../store/actions/user.action';
+import { LOGIN_USER, LoginUser, LoginUserEffect } from '../store/actions/user.action';
 import { User } from '../models';
 import { RootState } from '../store/reducers';
 import { environment } from '../../environments/environment';
+import { getUserState } from '../store/selectors/user.selector';
+import { map } from 'rxjs/operators';
 
 
 export class ErrorStateMatcherImpl implements ErrorStateMatcher {
@@ -74,31 +76,52 @@ export class UsernameFormComponent implements OnInit {
   {
     if(this.input_value !== "user")
     {
-      const res = this.loginService
-      .loginUser(this.input_value)
-      .then((response) => {
 
-        this.user_logged_in = true;
+      //Call effect to do the login of user.
+      this.store.dispatch(new LoginUserEffect(this.input_value));
 
-        if(response === "added user")
+      this.store.select(getUserState)
+      .subscribe(resp => {
+
+        if(resp.name !== "user")
         {
           this.toastr.success(`Welcome ${this.input_value}`,
-          "Success!",this.pos_toastr);   
-        }
-        else if (response === "already logged in")
-        {
-          this.toastr.success("Logged in","Welcome again!",this.pos_toastr);
-        }
-        window.localStorage.setItem("username",this.input_value);
+            "Success!",this.pos_toastr);
 
-        this.store.dispatch({
-          type:LOGIN_USER,
-          payload : new User(this.input_value)});
-        })
-        .catch((err) => {
-          this.toastr.error("Error happened","Error!",this.pos_toastr);
-          this.user_logged_in = false;
-        })
+          window.localStorage.setItem("username",this.input_value);
+          this.user_logged_in = true;
+        }  
+        
+
+      })
+      
+
+
+      // const res = this.loginService
+      // .loginUser(this.input_value)
+      // .then((response) => {
+
+      //   this.user_logged_in = true;
+
+      //   if(response === "added user")
+      //   {
+      //     this.toastr.success(`Welcome ${this.input_value}`,
+      //     "Success!",this.pos_toastr);   
+      //   }
+      //   else if (response === "already logged in")
+      //   {
+      //     this.toastr.success("Logged in","Welcome again!",this.pos_toastr);
+      //   }
+      //   window.localStorage.setItem("username",this.input_value);
+
+      //   this.store.dispatch({
+      //     type:LOGIN_USER,
+      //     payload : new User(this.input_value)});
+      //   })
+      //   .catch((err) => {
+      //     this.toastr.error("Error happened","Error!",this.pos_toastr);
+      //     this.user_logged_in = false;
+      //   })
 
 
     }

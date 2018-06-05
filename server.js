@@ -37,7 +37,7 @@ app.post('/users',(req,res)=>{
     .catch((err)=>{
       if(err.error === 'services/chatkit/user_already_exists')
       {
-        res.send("already logged in").sendStatus(201);
+        res.send(username).sendStatus(201);
       }
       else
       {

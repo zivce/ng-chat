@@ -15,13 +15,10 @@ export class LoginService {
   constructor(private http:HttpClient) {
 
   }  
-  loginUser (user : String) : Promise<any>
+  loginUser (user : String) : Observable<string>
   {
     const headers1 = new HttpHeaders({"Content-Type": "application/json"});
-
-    // headers.append(
-    //   'Content-Type' , "application/json"
-    // )
+   
     const headers = headers1;
     const username = user;
 
@@ -33,20 +30,6 @@ export class LoginService {
         reportProgress : true,
         responseType:'text'}
     )
-    .toPromise();
+   
   }
-  // loginUser(user:String):Observable<Response>
-  // {
-  //   let headers:HttpHeaders = new HttpHeaders({
-  //     'Content-Type' : 'application/json'
-  //   });
-  //   const httpOptions = {
-  //     headers : headers
-  //   }
-    
-  //   // return this.http.post(
-  //   //   LOGIN_URL
-  //   //   ,JSON.stringify(user))
-
-  // }
 }

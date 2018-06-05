@@ -35,7 +35,9 @@ export class WhosOnlineListItemComponent implements OnInit,DoCheck {
     
     this.present_users$ = this.store.select(selectPresentIds);
       
-    // this.cs.presenceStore$.subscribe(val => this.present_users$ = this.store.select(selectPresentIds))
+    this.cs.presenceStore$
+      .subscribe(
+        val => this.present_users$ = this.store.select(selectPresentIds))
     
     /** Find out how is online in group */
     this.present_users$.subscribe((ids_present_users : string[])=>{

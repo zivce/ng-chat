@@ -2,7 +2,7 @@ import { initState, AppState, initConnState, ConnState, initRoomState } from "..
 import { User } from "../../models";
 import { ActionReducer, State } from "@ngrx/store";
 import { Action } from "@ngrx/store";
-import { LoginUser, LOGIN_USER,CONNECTED_USER,ConnectedUser } from "../actions//user.action";
+import { LoginUser, LOGIN_USER,CONNECTED_USER,ConnectedUser} from "../actions//user.action";
 
 
 export function loginUserReducer(state = initState, action : Action)
@@ -15,12 +15,14 @@ export function loginUserReducer(state = initState, action : Action)
                 user: payload
             }
         }
+        
         default : 
         {
             return state;        
         }
     }
 }
+
 
 
 

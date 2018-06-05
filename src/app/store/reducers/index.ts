@@ -20,7 +20,7 @@ export interface RootState {
 
 export * from '../actions';
 
-export const ROOT_REDUCER = {
+export const ROOT_REDUCER : ActionReducerMap<RootState> = {
     user : loginUserReducer,
     connected_user : connectedUserReducer,
     messages : messageReducer,

@@ -4,6 +4,7 @@ import { WhosOnlineListItemComponent } from './whos-online-list-item/whos-online
 import Chatkit from '@pusher/chatkit';
 import { ConnectService } from '../services/connect.service';
 import { Store } from '@ngrx/store';
+
 import { RootState, getRoomState } from '../store/reducers';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { selectRoom, selectPresentIds } from '../store/selectors/room.selector';
@@ -72,6 +73,7 @@ export class ChatScreenComponent implements OnInit {
   }
   ngOnInit() {
     this.connectService.connect();
+
     
   }
 

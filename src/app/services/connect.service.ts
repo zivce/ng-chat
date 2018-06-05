@@ -34,26 +34,25 @@ export class ConnectService {
   ) {
     this.presenceStore$ = new Subject<boolean>();
     
-    if(this.store)
-      
+  }
 
+  connect()  : Observable<string> {
+
+    if(this.store)
       this.user$ = this.store.select(getUserState);
 
       this.user$.subscribe(( resp) => {
-
         this.chatManager = new ChatKit.ChatManager({
           instanceLocator: environment.pusher.instance_locator,
-          userId : resp.name === "user" ? localStorage.getItem("username") :  resp.name,
+          userId : resp.name === "user" ? localStorage.getItem("username") : resp.name,
           tokenProvider : new ChatKit.TokenProvider({
               url:environment.pusher.auth_url
           })
         })
       })
     
-  }
 
-  connect() {
-    this.chatManager
+    return this.chatManager
       .connect()
       .then((currentUser)=> {
         

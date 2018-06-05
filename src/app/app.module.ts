@@ -9,33 +9,49 @@ import { HttpClientModule } from '@angular/common/http'
 
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-/**Toastr module */
+
+
+/**Miscellaneous */
 import {ToastrModule, ToastrService} from 'ngx-toastr';
+import {AvatarModule } from 'ngx-avatar'
+
 
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
-import { storeLogger } from 'ngrx-store-logger';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+/**
+ * My components
+ *  */
 import { AppComponent } from './app.component';
 import { UsernameFormComponent } from './username-form/username-form.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatScreenComponent } from './chat-screen/chat-screen.component';
-import { LoginService } from './services/login.service';
-import { StoreModule, ActionReducer } from '@ngrx/store';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {environment} from '../environments/environment';
-import { ROOT_REDUCER } from './store/reducers';
-
-import { AppState } from './store/state';
 import { WhosOnlineListComponent } from './chat-screen/whos-online-list/whos-online-list.component';
 import { WhosOnlineListItemComponent } from './chat-screen/whos-online-list-item/whos-online-list-item.component';
 import { MessageListComponent } from './chat-screen/message-list/message-list.component';
 import { SendMessageFormComponent } from './chat-screen/send-message-form/send-message-form.component';
-import { ConnectService } from './services/connect.service';
-
 import { MessageListItmComponent } from './chat-screen/message-list/message-list-itm/message-list-itm.component';
 
-import {AvatarModule } from 'ngx-avatar'
- 
+
+
+/**Environment */
+import {environment} from '../environments/environment';
+
+/**State management */
+import { effects } from './store/effects';
+import { ROOT_REDUCER } from './store/reducers';
+import { AppState } from './store/state';
+import { EffectsModule, Actions } from '@ngrx/effects'
+import { StoreModule, ActionReducer } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+
+/**Services */
+import { ConnectService } from './services/connect.service';
+import { LoginService } from './services/login.service';
+
+
+ /**NG router */
 export const appRoutes : Routes = [
   {path : "", component : UsernameFormComponent},
   {path : "chat/:id", component : ChatScreenComponent}
@@ -59,6 +75,7 @@ export const appRoutes : Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(ROOT_REDUCER),
+    EffectsModule.forRoot(effects),
     AvatarModule,
     /**
      * Material modules
@@ -77,7 +94,7 @@ export const appRoutes : Routes = [
     }),
 
   ],
-  providers : [ToastrService, LoginService,ConnectService],
+  providers : [ToastrService, LoginService,ConnectService, Actions],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
